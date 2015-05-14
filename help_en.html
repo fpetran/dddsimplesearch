@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- The images used on this side are all open source and available at href="http://www.web-toolbox.net/abc/index.htm" -->
+
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>ReM Simple Search - Documentation</title>
+</head>
+<body>
+
+<div id="RUB"> 
+<a href="http://www.ruhr-uni-bochum.de/index_en.htm">
+  <img src="http://www.ruhr-uni-bochum.de/images/logos/rub-schriftzug.gif" alt="Ruhr-Universität Bochum" name="schriftzug" width="247" height="18" id="schriftzug" style="margin-bottom: 15px;" />
+</a>
+<a title="Main page of the Linguistics department" href="http://www.linguistics.rub.de/" class="linguistics">
+  <img src="logo-ling.gif" alt="Department of Linguistics" name="schriftzug-ling" height="18" id="schriftzug-ling" style="margin-bottom: 15px;" />
+</a></div>
+<div id="CompHist"><a id="CompHist" title="Main page of Computational Historical Linguistics" href="http://www.linguistics.rub.de/comphist/index.html">
+   COMPUTATIONAL HISTORICAL LINGUISTICS</a></div>
+
+<div class="language">
+<a class="language" href="./help_de.html">Deutsch</a>
+</div>
+
+<br style="clear: none;">
+
+<header>
+<h1 style="margin-bottom: 0;">Referenzkorpus Mittelhochdeutsch (ReM)</h1>
+<h4 style="margin-bottom: 3em;">Referential Corpus for Middle High German</h4>
+<p class="headerlink">
+<a class="headerlink" href="./simple_search_en.html">Simplified Search</a> |
+<a class="headerlink" href="http://smokehead.linguistics.rub.de/annis3">Advanced Search</a> |
+Documentation
+</p>
+</header>
+<div>
+<h2>Documentation simplified search</h2>
+<p>This documentation outlines the functions provided by the simplified search.</p>
+<p>Below the single parts of the simplified search are listed and illustraited.</p>
+<h3>Simplified search</h3>
+<p>The simplified search page consists of three parts. The upper part merely states the project name, but also offers a link to the <a class="textlink" href="./simple_search_en.html">simplified search</a>, the <a class="textlink" href="http://smokehead.linguistics.rub.de/annis3">ANNIS search tool</a>, and this documentation page.</p>
+<p>The middle part consists of a large query box in which a query can be entered. More information about this box is provided below under &quot;Query box&quot; and &quot;Search area&quot;.</p>
+<p>At the bottom of the page, tickboxes allow the user to constrain the query in the query box to a number of categories. More information on these meta-categories is provided below under &quot;Meta constraints&quot;.</p>
+<h4>Query box</h4>
+<p>The query box is set up to parse the input that it receives in such a way that a more complex ANNIS query can be written. You may enter a single word or multiple word queries.</p>
+<p>The parser of the query box also automatically resolves diacritics to the form that occurs in the corpora.</p>
+<p>Finally, it is possible to use simple regular expressions in the query box.</p>
+<h4>Search area</h4>
+<p>The search area specifies how your query is interpreted.</p>
+<p>You can choose between a word form search and a lemma search. The word form is the form the word occurs in the text. As word forms there are used simplified forms generated from the transcription.<br>A lemma is a generalized word form. For example a lemma entry in ReM is <i>bruoder</i> (brother). The lemma <i>bruoder</i> can be realized as different word forms, e.g. identical as <i>bruoder</i>, but also as <i>bruder</i>, <i>brvder</i>, <i>pruder</i> or even <i>brudir</i>. Of course the word forms highly depend on the time of their text creation and dialect areas. But it is always the same lemma <i>bruoder</i> represented.</p> 
+<p>If you are not sure which word forms could possibly occur in the texts or if you do not want to restrict your query on concrete word forms, you should use the lemma search. Of course you still have to know the exact Middle High German lemma entries. A good start for getting these lemma entries is the Middle High German lexicon of Matthias <a class="textlink link-extern" href="http://woerterbuchnetz.de/Lexer/">Lexer (in German)</a>.</p>
+<p>Furthermore you have the option to let your query be part of another word. Choose &quot;Hole word&quot; to simply search your query as typed in. For example if you enter <i>mit</i> in the query box by choosed &quot;Hole word&quot;, the string <i>mit</i> is searched and all occurrences of <i>mit</i> are found. If you enter <i>mit</i> into the query box and choose &quot;Word starts with query&quot; (and a word form search), the search finds <i>mit</i>, but also e.g. <i>mite</i> (a word form of the lemma <i>mit(e)</i>), or <i>mitte</i> and <i>mitten</i> (word forms of the lemma <i>mitte</i>). Choose &quot;Word ends on query&quot; to find e.g. <i>goumit</i> (lemma: goumen) or <i>urumit</i> (lemma: vrumen). In all cases also <i>mit</i> will be found.</p>
+<p></p>
+<h4>Meta constraints</h4>
+<p>The meta categories provide constraints on the text search:
+<ul>
+<li>&quot;Dating&quot; is based on the century in which the text is supposedly written down</li>
+<li>&quot;Text field&quot; specifies a certain topic the text can be associated with</li>
+<li>&quot;Dialect area&quot; is based on an interpretation of the dialect area that some texts may be typical for</li>
+</ul>
+If no constraint is set, all texts are searched. Every checked tickbox further constrains the searched texts. If you check &quot;12th century&quot;, &quot;14th century&quot;, &quot;religion&quot; and &quot;Bavarian&quot;, only Bavarian texts dating from the 12th and 14th century with religion as their topic are searched for your query.
+</p>
+<h3>For advanced searching</h3>
+<p>If you want to formulate more complex and specific queries, you should use the <a class="textlink" href="http://smokehead.linguistics.rub.de/annis3">ANNIS search tool</a> directly. This simple search redirects to the ANNIS search tool, but secretly formulates a formal query ANNIS can work up (you can see this query in ANNIS on the left side, if you ran a query with the simplified search).</p>
+<p>Every user can formulate such a formal query and let ANNIS search with it. The used formal language is called AQL (ANNIS Query Language). For further information on AQL and its structure see <a class="textlink link-extern" href="http://annis-tools.org/aql.html">http://annis-tools.org/aql.html</a>.</p>
+<h3>Example queries</h3>
+<p>A number of things that can be typed in for your inspiration:</p>
+<ul>
+<li><i>jesus christus</i></li>
+<li><i>got</i>, as a word form search and constraints on the 13th century</li>
+<li><i>maria</i> as a lemma search and constraints on Hessian</li>
+<li><i>maria</i> as a word form search<br>(Notice the different realizations of <i>maria</i> in the different texts)</li>
+<li><i>umbe</i> as lemma search and with checked &quot;Word ends on query&quot;<br>(this way the search also finds compounded lemma entries such as <i>w&acirc;r/+umbe</i> and <i>d&acirc;r/+umbe</i>. As word forms this would be seperated words: <i>w&acirc;r</i> <i>umbe</i> and <i>d&acirc;r</i> <i>umbe</i>)</li>
+<li><i>h[vu]nd[ei]rt</i> as word form search<br>(This is a regular expression. The square brackets stand for an option. It is searched for <i>hvndert</i>, <i>hundert</i>, <i>hvndirt</i> and <i>hundirt</i>)</li>
+<li>...</li>
+</ul>
+</div>
+<footer>
+<hr/>
+<p>Documentation to the simplified search of ReM</p>
+<p>The source code and development of the simplified search can be monitored on <a class="textlink link-extern" href="https://github.com/pagelj/remsimplesearch">GitHub</a></p>
+</footer>
+</html>
