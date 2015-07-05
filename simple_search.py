@@ -12,14 +12,16 @@ based on a script by Tom Ruette, HU Berlin
 '''
 
 # import needed modules
-import urllib2, re, urllib, cgi, codecs
-import cgitb
+import urllib2, re, urllib, codecs
+import cgi
+#import cgitb
+
 
 def getREMCorpora():
     # function for reading in all available xml-filenames of REM
 
     xml = urllib.urlopen('http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora').read().decode("utf-8")
-    regex = re.compile("<name>(REM-gruppe.+?)</name>")
+    regex = re.compile("<name>(.+?)</name>")
 
     return regex.findall(xml)
 
@@ -156,9 +158,8 @@ def parseQuery(d, a):
                         searchlist.append(hit)
         except KeyError:
             continue
-        if len(searchlist) > 0:
 
-            search = annolevel[11:] + "=/(" + "|".join(searchlist) + ")/"
+        search = annolevel[11:] + "=/(" + "|".join(searchlist) + ")/"
 
         if search:
             parameters.append(search)
@@ -254,8 +255,9 @@ def form2aql(form, adict):
 
 corpora = getREMCorpora()
 annos = getREMAnnotations(corpora)
-cgitb.enable(display=1)
+#cgitb.enable(display=1)
 form = cgi.FieldStorage()
+
 aqlstr, url = form2aql(form, annos)
 
 
