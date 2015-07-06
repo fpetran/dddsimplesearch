@@ -1,156 +1,122 @@
 <!DOCTYPE html>
 <html lang="de">
-<!-- The images used on this side are all open source and available at href="http://www.web-toolbox.net/abc/index.htm" and href="http://findicons.com/icon/117163/question_white" -->
+  <!-- The images used on this side are all open source and available at href="http://www.web-toolbox.net/abc/index.htm" and href="http://findicons.com/icon/117163/question_white" -->
   
   <head>
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>ReM Einfache Suche</title>
     
     <!-- This Script is taken (and slightly modified) from href="http://www.web-toolbox.net/webtoolbox/dhtml/info-box01/info-box01.htm"  -->
-    <script type="text/javascript" language="JavaScript">
-      
-      <!--
-      var offsetx=20
-      var offsety=0
-      
-      function HideInfoBox() {
-      document.getElementById('InfoBox').style.visibility = "hidden";
-      }
-      
-      function ShowInfoBox(e,content,offsetX,offsetY)
-      {
-      if (offsetX) {offsetx=offsetX;} else {offsetx=20;}
-      if (offsetY) {offsety=offsetY;} else {offsety=0;}
-      var PositionX = 0;
-      var PositionY = 0;
-      if (!e) var e = window.event;
-      if (e.pageX || e.pageY)
-      {
-      PositionX = e.pageX;
-      PositionY = e.pageY;
-      }
-      else if (e.clientX || e.clientY)
-      {
-      PositionX = e.clientX + document.body.scrollLeft;
-      PositionY = e.clientY + document.body.scrollTop;
-      }
-      
-      document.getElementById("BoxContent").innerHTML = content;
-      document.getElementById('InfoBox').style.left = (PositionX+offsetx)+"px";
-      document.getElementById('InfoBox').style.top = (PositionY+offsety)+"px";
-      document.getElementById('InfoBox').style.visibility = "visible";
-      }
-      // -->      
-
-    </script>
+    <script type="text/javascript" src="simple_search.js"></script>
     
   </head>
   
   <body>
     
     
-  <!-- Begin DIV for InfoBox -->
+    <!-- Begin DIV for InfoBox -->
 
-  <div id="InfoBox" style="z-index:1; visibility:hidden;">
-    <div id="BoxInner"><span id="BoxContent">&nbsp;</span></div>
-  </div>
-  
-  <!-- End DIV for InfoBox -->
-
-<div id="RUB"> 
-<a href="http://www.ruhr-uni-bochum.de/index_en.htm">
-  <img src="http://www.ruhr-uni-bochum.de/images/logos/rub-schriftzug.gif" alt="Ruhr-Universität Bochum" name="schriftzug" width="247" height="18" id="schriftzug" style="margin-bottom: 15px;" />
-</a>
-<a title="Main page of the Linguistics department" href="http://www.linguistics.rub.de/" class="linguistics">
-  <img src="logo-ling.gif" alt="Department of Linguistics" name="schriftzug-ling" height="18" id="schriftzug-ling" style="margin-bottom: 15px;" />
-</a></div>
-<div id="CompHist"><a id="CompHist" title="Main page of Computational Historical Linguistics" href="http://www.linguistics.rub.de/comphist/index.html">
-   COMPUTATIONAL HISTORICAL LINGUISTICS</a></div>
-
-<div class="language">
-<a class="language" href="./simple_search_en.html">English</a>
-</div>
-
-<br style="clear: left">
- 
-  <header>
-    <h1>Referenzkorpus Mittelhochdeutsch (ReM)</h1>
-    <p class="headerlink">Einfache Suche | <a class="headerlink" href="http://smokehead.linguistics.rub.de/annis3">Fortgeschrittene Suche</a> | <a class="headerlink" href="./help_de.html">Dokumentation</a> <a onmouseover="ShowInfoBox(event,'<ul><li>Fortgeschrittene Suche: leitet Sie direkt zum Annis-Tool, f&uuml;r das diese einfache Suchmaske geschrieben wurde</li><li>Klicken Sie auf &quot;Dokumentation&quot;, wenn Sie genauere Angaben zu dieser Seite und den verwendeten Suchverfahren erfahren m&ouml;chten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></p>
-  </header>
-
-  <div id="search">
-    <form method="post" action="simple_search.py" target="_blank">
-      
-      <div id="textfield">
-	<p>
-	  <a><input type="text" name="query" placeholder="Bitte geben Sie Ihre Suchanfrage ein."></a> <a onmouseover="ShowInfoBox(event,'Geben Sie hier Ihre Suchanfrage ein.<br>Die Anfrage kann aus einem oder mehreren W&ouml;rtern bestehen.',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a>
-	</p>
-      </div>
-      
-      
-<div class="search_method_field">
-<input type="radio" name="scope" value="default_ns:tok_mod" checked>Wortform
-<input type="radio" name="scope" value="default_ns:lemma">Lemma 
-<a onmouseover="ShowInfoBox(event,'<ul><li>Entscheiden Sie, ob Sie nach Wortform oder Lemma suchen m&ouml;chten</li><li>Die Wortform ist die Form, wie sie im Text auftritt, also z.B. &quot;pruder&quot;</li><li>Das Lemma ist eine allgemeine Wortform, auf die die konkreten Wortformen zur&uuml;ckgef&uuml;hrt wurden: f&uuml;r &quot;pruder&quot; z.B. &quot;bruoder&quot;</li><li>Suchen Sie die Dokumentation auf, falls Sie genauere Informationen zu diesem Thema w&uuml;nschen</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a>
-</div>
-      
-<div class="search_method_field">
-<ul>
-<li><input type="radio" name="search_method" value="hole_string" checked>Komplettes Wort</li>
-<li><input type="radio" name="search_method" value="begins_with_word">Wort beginnt mit Eingabe
-<a onmouseover="ShowInfoBox(event,'<ul><li>Komplettes Wort: Suchen Sie nach dem Wort, wie Sie es eingeben, z.B. &quot;mit&quot;</li><li>Oder: Lassen sie zu, dass das Wort auch Bestandteil eines anderen Wortes seien darf (es wird trotzdem auch das Wort an sich gesucht):</li><ul><li>Wort beginnt mit Eingabe: findet z.B. auch &quot;mite&quot;, &quot;mitte&quot; oder &quot;mitten&quot;</li><li>Wort endet auf Eingabe: findet z.B. auch &quot;goumit&quot; oder &quot;urumit&quot;</li></ul></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></li>
-<li><input type="radio" name="search_method" value="ends_with_word">Wort endet auf Eingabe</li>
-</ul>
-</div>
-
-      
-      <div id="metafield">
-	<table id="metatable">
-	  <tr>
-	    <th>Entstehungszeit</th>
-	    <th>Themenbereich</th>
-	    <th>Sprachgebiet <a onmouseover="ShowInfoBox(event,'Sie k&ouml;nnen die durchsuchten Texte nach bestimmten Kriterien beschr&auml;nken: <ul><li>&Uuml;ber Entstehungszeit legen Sie fest, wann der Text mutma&szlig;lich verfasst wurde</li><li>Sie k&ouml;nnen die Texte auch auf bestimmte Themenbereiche einschr&auml;nken</li><li>Das Sprachgebiet repr&auml;sentiert einen Dialekt, f&uuml;r den der Text als typisch gesehen werden kann</li><li>Nat&uuml;rlich k&ouml;nnen innerhalb und zwischen den Spalten auch mehrere H&auml;kchen gesetzt werden</li><li>Wenn kein H&auml;kchen gesetzt ist, erfolgt die Suche unbeschr&auml;nkt in allen Texten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></th> 
-	  </tr>
-	  <tr>
-	    <td>
-	      <ul>
-		<li><input type="checkbox" name="dating" value="11">11. Jahrhundert</li>
-		<li><input type="checkbox" name="dating" value="12">12. Jahrhundert</li>
-		<li><input type="checkbox" name="dating" value="13">13. Jahrhundert</li>
-		<li><input type="checkbox" name="dating" value="14">14. Jahrhundert</li>
-	      </ul>
-	    </td>
-	    
-	    <td>
-	      <ul>
-		<li><input type="checkbox" name="textfield" value="alltag">Alltag</li>
-		<li><input type="checkbox" name="textfield" value="literatur">Literatur</li>
-		<li><input type="checkbox" name="textfield" value="poesie">Poesie</li>
-		<li><input type="checkbox" name="textfield" value="wissen">Wissen(-schaft)</li>
-		<li><input type="checkbox" name="textfield" value="religion">Religion</li>
-	      </ul>
-	    </td>
-	    
-	    <td>
-	      <ul>
-		<li><input type="checkbox" name="location" value="alem">Alemannisch</li>
-		<li><input type="checkbox" name="location" value="bair">Bairisch</li>
-		<li><input type="checkbox" name="location" value="fr.?nk">Fr&auml;nkisch</li>
-		<li><input type="checkbox" name="location" value="hess">Hessisch</li>
-	      </ul>
-	    </td>
-	  </tr>
-	</table>
-      </div>
-      
-      <div id="actionfield">
-	<p><button type="submit">Suche</button> <a onmouseover="ShowInfoBox(event,'&Uuml;ber &quot;Suche&quot; starten Sie Ihre Suchanfrage und werden direkt auf die Seite des Annis-Tools weitergeleitet. Dort finden Sie im kleinen Fenster auf der linken Seite ihre Suchanfrage im AQL-Format. Die Suchergebnisse finden Sie im Hauptfenster in der Mitte.',20,-150);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></p>
-      </div>
-      
-    </form>
+    <div id="InfoBox" style="z-index:1; visibility:hidden;">
+      <div id="BoxInner"><span id="BoxContent">&nbsp;</span></div>
+    </div>
     
-  </div>
+    <!-- End DIV for InfoBox -->
 
-</body>
+    <div id="RUB"> 
+      <a href="http://www.ruhr-uni-bochum.de/index_en.htm">
+	<img src="http://www.ruhr-uni-bochum.de/images/logos/rub-schriftzug.gif" alt="Ruhr-Universität Bochum" name="schriftzug" width="247" height="18" id="schriftzug" style="margin-bottom: 15px;" />
+      </a>
+      <a title="Main page of the Linguistics department" href="http://www.linguistics.rub.de/" class="linguistics">
+	<img src="logo-ling.gif" alt="Department of Linguistics" name="schriftzug-ling" height="18" id="schriftzug-ling" style="margin-bottom: 15px;" />
+    </a></div>
+    <div id="CompHist"><a id="CompHist" title="Main page of Computational Historical Linguistics" href="http://www.linguistics.rub.de/comphist/index.html">
+	COMPUTATIONAL HISTORICAL LINGUISTICS</a></div>
+
+    <div class="language">
+      <a class="language" href="./simple_search_en.html">English</a>
+    </div>
+
+    <br style="clear: left">
+    
+    <header>
+      <h1>Referenzkorpus Mittelhochdeutsch (ReM)</h1>
+      <p class="headerlink">Einfache Suche | <a class="headerlink" href="http://smokehead.linguistics.rub.de/annis3">Fortgeschrittene Suche</a> | <a class="headerlink" href="./help_de.html">Dokumentation</a> <a onmouseover="ShowInfoBox(event,'<ul><li>Fortgeschrittene Suche: leitet Sie direkt zum Annis-Tool, f&uuml;r das diese einfache Suchmaske geschrieben wurde</li><li>Klicken Sie auf &quot;Dokumentation&quot;, wenn Sie genauere Angaben zu dieser Seite und den verwendeten Suchverfahren erfahren m&ouml;chten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></p>
+    </header>
+
+    <div id="search">
+      <form method="post" action="simple_search.py" target="_blank">
+	
+	<div id="textfield">
+	  <p>
+	    <a><input type="text" name="query" placeholder="Bitte geben Sie Ihre Suchanfrage ein." required></a> <a onmouseover="ShowInfoBox(event,'Geben Sie hier Ihre Suchanfrage ein.<br>Die Anfrage kann aus einem oder mehreren W&ouml;rtern bestehen.',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a>
+	  </p>
+	</div>
+	
+	
+	<div class="search_method_field">
+	  <input type="radio" name="scope" value="default_ns:tok_mod" checked>Wortform
+	  <input type="radio" name="scope" value="default_ns:lemma">Lemma 
+	  <a onmouseover="ShowInfoBox(event,'<ul><li>Entscheiden Sie, ob Sie nach Wortform oder Lemma suchen m&ouml;chten</li><li>Die Wortform ist die Form, wie sie im Text auftritt, also z.B. &quot;pruder&quot;</li><li>Das Lemma ist eine allgemeine Wortform, auf die die konkreten Wortformen zur&uuml;ckgef&uuml;hrt wurden: f&uuml;r &quot;pruder&quot; z.B. &quot;bruoder&quot;</li><li>Suchen Sie die Dokumentation auf, falls Sie genauere Informationen zu diesem Thema w&uuml;nschen</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a>
+	</div>
+	
+	<div class="search_method_field">
+	  <ul>
+	    <li><input type="radio" name="search_method" value="hole_string" checked>Komplettes Wort</li>
+	    <li><input type="radio" name="search_method" value="begins_with_word">Wort beginnt mit Eingabe
+	      <a onmouseover="ShowInfoBox(event,'<ul><li>Komplettes Wort: Suchen Sie nach dem Wort, wie Sie es eingeben, z.B. &quot;mit&quot;</li><li>Oder: Lassen sie zu, dass das Wort auch Bestandteil eines anderen Wortes seien darf (es wird trotzdem auch das Wort an sich gesucht):</li><ul><li>Wort beginnt mit Eingabe: findet z.B. auch &quot;mite&quot;, &quot;mitte&quot; oder &quot;mitten&quot;</li><li>Wort endet auf Eingabe: findet z.B. auch &quot;goumit&quot; oder &quot;urumit&quot;</li></ul></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></li>
+	    <li><input type="radio" name="search_method" value="ends_with_word">Wort endet auf Eingabe</li>
+	  </ul>
+	</div>
+
+	
+	<div id="metafield">
+	  <table id="metatable">
+	    <tr>
+	      <th>Entstehungszeit</th>
+	      <th>Themenbereich</th>
+	      <th>Sprachgebiet <a onmouseover="ShowInfoBox(event,'Sie k&ouml;nnen die durchsuchten Texte nach bestimmten Kriterien beschr&auml;nken: <ul><li>&Uuml;ber Entstehungszeit legen Sie fest, wann der Text mutma&szlig;lich verfasst wurde</li><li>Sie k&ouml;nnen die Texte auch auf bestimmte Themenbereiche einschr&auml;nken</li><li>Das Sprachgebiet repr&auml;sentiert einen Dialekt, f&uuml;r den der Text als typisch gesehen werden kann</li><li>Nat&uuml;rlich k&ouml;nnen innerhalb und zwischen den Spalten auch mehrere H&auml;kchen gesetzt werden</li><li>Wenn kein H&auml;kchen gesetzt ist, erfolgt die Suche unbeschr&auml;nkt in allen Texten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></th> 
+	    </tr>
+	    <tr>
+	      <td>
+		<ul>
+		  <li><input type="checkbox" name="dating" value="11">11. Jahrhundert</li>
+		  <li><input type="checkbox" name="dating" value="12">12. Jahrhundert</li>
+		  <li><input type="checkbox" name="dating" value="13">13. Jahrhundert</li>
+		  <li><input type="checkbox" name="dating" value="14">14. Jahrhundert</li>
+		</ul>
+	      </td>
+	      
+	      <td>
+		<ul>
+		  <li><input type="checkbox" name="textfield" value="alltag">Alltag</li>
+		  <li><input type="checkbox" name="textfield" value="literatur">Literatur</li>
+		  <li><input type="checkbox" name="textfield" value="poesie">Poesie</li>
+		  <li><input type="checkbox" name="textfield" value="wissen">Wissen(-schaft)</li>
+		  <li><input type="checkbox" name="textfield" value="religion">Religion</li>
+		</ul>
+	      </td>
+	      
+	      <td>
+		<ul>
+		  <li><input type="checkbox" name="location" value="alem">Alemannisch</li>
+		  <li><input type="checkbox" name="location" value="bair">Bairisch</li>
+		  <li><input type="checkbox" name="location" value="fr.?nk">Fr&auml;nkisch</li>
+		  <li><input type="checkbox" name="location" value="hess">Hessisch</li>
+		</ul>
+	      </td>
+	    </tr>
+	  </table>
+	</div>
+	
+	<div id="actionfield">
+	  <p><button type="submit">Suche</button> <a onmouseover="ShowInfoBox(event,'&Uuml;ber &quot;Suche&quot; starten Sie Ihre Suchanfrage und werden direkt auf die Seite des Annis-Tools weitergeleitet. Dort finden Sie im kleinen Fenster auf der linken Seite ihre Suchanfrage im AQL-Format. Die Suchergebnisse finden Sie im Hauptfenster in der Mitte.',20,-150);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></p>
+	</div>
+	
+      </form>
+      
+    </div>
+
+  </body>
 </html>
