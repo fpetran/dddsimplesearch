@@ -195,14 +195,14 @@ def parseRaum(d, a):
     out = []
     try:
         locs = d["location"]
-        poslocs = a["default_ns:entry_dialect_val"]
+        poslocs = a["default_ns:entry_dialect_area_val"]
         for loc in locs:
             regex_loc = re.compile(loc, re.IGNORECASE)
             for posloc in poslocs:
                 if regex_loc.search(posloc):
                     if posloc not in out:
                         out.append(posloc.replace('?', '\?'))
-        query = unicode("meta::entry_dialect_val=/(" + "|".join(out) + ")/").encode("utf-8")
+        query = unicode("meta::entry_dialect_area_val=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
         return ""

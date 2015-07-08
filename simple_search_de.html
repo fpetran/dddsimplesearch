@@ -46,7 +46,7 @@
     </header>
 
     <div id="search">
-      <form method="post" action="simple_search.py" target="_blank">
+      <form method="post" action="cgi-bin/simple_search.py" target="_blank">
 	
 	<div id="textfield">
 	  <p>
@@ -79,6 +79,7 @@
 	      <th>Sprachgebiet <a onmouseover="ShowInfoBox(event,'Sie k&ouml;nnen die durchsuchten Texte nach bestimmten Kriterien beschr&auml;nken: <ul><li>&Uuml;ber Entstehungszeit legen Sie fest, wann der Text mutma&szlig;lich verfasst wurde</li><li>Sie k&ouml;nnen die Texte auch auf bestimmte Themenbereiche einschr&auml;nken</li><li>Das Sprachgebiet repr&auml;sentiert einen Dialekt, f&uuml;r den der Text als typisch gesehen werden kann</li><li>Nat&uuml;rlich k&ouml;nnen innerhalb und zwischen den Spalten auch mehrere H&auml;kchen gesetzt werden</li><li>Wenn kein H&auml;kchen gesetzt ist, erfolgt die Suche unbeschr&auml;nkt in allen Texten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></th> 
 	    </tr>
 	    <tr>
+
 	      <td>
 		<ul>
 		  <li><input type="checkbox" name="dating" value="11">11. Jahrhundert</li>
@@ -100,12 +101,14 @@
 	      
 	      <td>
 		<ul>
-		  <li><input type="checkbox" name="location" value="alem">Alemannisch</li>
-		  <li><input type="checkbox" name="location" value="bair">Bairisch</li>
-		  <li><input type="checkbox" name="location" value="fr.?nk">Fr&auml;nkisch</li>
-		  <li><input type="checkbox" name="location" value="hess">Hessisch</li>
+		  <li><input type="checkbox" name="location" value="westmittel">Westmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="ostmittel">Ostmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="westober">Westoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="ostober">Ostoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="nordober">Nordoberdeutsch</li>
 		</ul>
 	      </td>
+
 	    </tr>
 	  </table>
 	</div>

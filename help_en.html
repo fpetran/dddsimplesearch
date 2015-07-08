@@ -59,7 +59,16 @@ Documentation
 <li>&quot;Text field&quot; specifies a certain topic the text can be associated with</li>
 <li>&quot;Dialect area&quot; is based on an interpretation of the dialect area that some texts may be typical for</li>
 </ul>
-If no constraint is set, all texts are searched. Every checked tickbox further constrains the searched texts. If you check &quot;12th century&quot;, &quot;14th century&quot;, &quot;religion&quot; and &quot;Bavarian&quot;, only Bavarian texts dating from the 12th and 14th century with religion as their topic are searched for your query.
+The dialect areas can be splitted into the following dialects:
+<ul>
+<li>West Middle German: Middle Franconian, Rhenish Franconian, Moselle Franconian, Ripuarian, Hessian</li>
+<li>East Middle German: South Thuringian, Thuringian, Upper Saxonian</li>
+<li>West Upper German: Alemannic, Swabian, Alsatian</li>
+<li>East Upper German: Bavarian, Austrian</li>
+<li>North Upper German: East Franconian, Rhenish Franconian, South Rhenish Franconian, Nurembergian</li>
+</ul>
+If you want to choose a single dialect, you should formulate or modify a query using the <a class="textlink" href="http://smokehead.linguistics.rub.de/annis3">advanced search</a>. Please see the section &quot;For advanced searching&quot; for further information.</p>
+<p>If no constraint is set, all texts are searched. Every checked tickbox constrains the searched texts. If you check &quot;12th century&quot;, &quot;14th century&quot;, &quot;religion&quot; and &quot;East Middle German&quot;, only East Middle German texts dating from the 12th and 14th century with religion as their topic are searched through your query.
 </p>
 <h3>For advanced searching</h3>
 <p>If you want to formulate more complex and specific queries, you should use the <a class="textlink" href="http://smokehead.linguistics.rub.de/annis3">ANNIS search tool</a> directly. This simple search redirects to the ANNIS search tool, but secretly formulates a formal query ANNIS can work up (you can see this query in ANNIS on the left side, if you ran a query with the simplified search).</p>
@@ -69,7 +78,7 @@ If no constraint is set, all texts are searched. Every checked tickbox further c
 <ul>
 <li><i>jesus christus</i></li>
 <li><i>got</i>, as a word form search and constraints on the 13th century</li>
-<li><i>maria</i> as a lemma search and constraints on Hessian</li>
+<li><i>maria</i> as a lemma search and constraints on West Middle German</li>
 <li><i>maria</i> as a word form search<br>(Notice the different realizations of <i>maria</i> in the different texts)</li>
 <li><i>umbe</i> as lemma search and with checked &quot;Word ends on query&quot;<br>(this way the search also finds compounded lemma entries such as <i>w&acirc;r/+umbe</i> and <i>d&acirc;r/+umbe</i>. As word forms this would be seperated words: <i>w&acirc;r</i> <i>umbe</i> and <i>d&acirc;r</i> <i>umbe</i>)</li>
 <li><i>h[vu]nd[ei]rt</i> as word form search<br>(This is a regular expression. The square brackets stand for an option. It is searched for <i>hvndert</i>, <i>hundert</i>, <i>hvndirt</i> and <i>hundirt</i>)</li>
