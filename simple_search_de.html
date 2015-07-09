@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>ReM Einfache Suche</title>
+    <title>REM Einfache Suche</title>
     
     <!-- This Script is taken (and slightly modified) from href="http://www.web-toolbox.net/webtoolbox/dhtml/info-box01/info-box01.htm"  -->
     <script type="text/javascript" src="simple_search.js"></script>
@@ -41,12 +41,12 @@
     <br style="clear: left">
     
     <header>
-      <h1>Referenzkorpus Mittelhochdeutsch (ReM)</h1>
+      <h1>Referenzkorpus Mittelhochdeutsch (REM)</h1>
       <p class="headerlink">Einfache Suche | <a class="headerlink" href="http://smokehead.linguistics.rub.de/annis3">Fortgeschrittene Suche</a> | <a class="headerlink" href="./help_de.html">Dokumentation</a> <a onmouseover="ShowInfoBox(event,'<ul><li>Fortgeschrittene Suche: leitet Sie direkt zum Annis-Tool, f&uuml;r das diese einfache Suchmaske geschrieben wurde</li><li>Klicken Sie auf &quot;Dokumentation&quot;, wenn Sie genauere Angaben zu dieser Seite und den verwendeten Suchverfahren erfahren m&ouml;chten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></p>
     </header>
 
     <div id="search">
-      <form method="post" action="simple_search.py" target="_blank">
+      <form method="post" action="cgi-bin/simple_search.py" target="_blank">
 	
 	<div id="textfield">
 	  <p>
@@ -79,6 +79,7 @@
 	      <th>Sprachgebiet <a onmouseover="ShowInfoBox(event,'Sie k&ouml;nnen die durchsuchten Texte nach bestimmten Kriterien beschr&auml;nken: <ul><li>&Uuml;ber Entstehungszeit legen Sie fest, wann der Text mutma&szlig;lich verfasst wurde</li><li>Sie k&ouml;nnen die Texte auch auf bestimmte Themenbereiche einschr&auml;nken</li><li>Das Sprachgebiet repr&auml;sentiert einen Dialekt, f&uuml;r den der Text als typisch gesehen werden kann</li><li>Nat&uuml;rlich k&ouml;nnen innerhalb und zwischen den Spalten auch mehrere H&auml;kchen gesetzt werden</li><li>Wenn kein H&auml;kchen gesetzt ist, erfolgt die Suche unbeschr&auml;nkt in allen Texten</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></th> 
 	    </tr>
 	    <tr>
+
 	      <td>
 		<ul>
 		  <li><input type="checkbox" name="dating" value="11">11. Jahrhundert</li>
@@ -100,12 +101,14 @@
 	      
 	      <td>
 		<ul>
-		  <li><input type="checkbox" name="location" value="alem">Alemannisch</li>
-		  <li><input type="checkbox" name="location" value="bair">Bairisch</li>
-		  <li><input type="checkbox" name="location" value="fr.?nk">Fr&auml;nkisch</li>
-		  <li><input type="checkbox" name="location" value="hess">Hessisch</li>
+		  <li><input type="checkbox" name="location" value="westmittel">Westmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="ostmittel">Ostmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="westober">Westoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="ostober">Ostoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="nordober">Nordoberdeutsch</li>
 		</ul>
 	      </td>
+
 	    </tr>
 	  </table>
 	</div>

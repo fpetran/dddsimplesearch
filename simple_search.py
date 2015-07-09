@@ -148,7 +148,7 @@ def parseQuery(d, a):
         try:
             for annoattr in a[annolevel]:
                 for hit in regex.findall(annoattr):
-                    if d["search_method"][0] == "hole_string":
+                    if d["search_method"][0] == "whole_string":
                         hit = regexescape(hit)
                     elif d["search_method"][0] == "begins_with_word":
                         hit = regexescape(hit) + ".*"
@@ -177,13 +177,15 @@ def parseZeit(d, a):
     out = []
     try:
         eras = d["dating"]
-        poseras = a["default_ns:entry_dating_val"]
+    #    poseras = a["default_ns:entry_dating_val"]
         for era in eras:
-            regex_era = re.compile(era, re.IGNORECASE)
-            for posera in poseras:
-                if regex_era.search(posera):
-                    if posera not in out:
-                        out.append(posera.replace('?', '\?'))
+    #        regex_era = re.compile(era, re.IGNORECASE)
+    #        for posera in poseras:
+    #            if regex_era.search(posera):
+    #                if posera not in out:
+    #                    out.append(posera.replace('?', '\?'))
+    #    query = unicode("meta::entry_dating_val=/(" + "|".join(out) + ")/").encode("utf-8")
+            out.append(".*" + era + ".*")
         query = unicode("meta::entry_dating_val=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
@@ -193,14 +195,14 @@ def parseRaum(d, a):
     out = []
     try:
         locs = d["location"]
-        poslocs = a["default_ns:entry_dialect_val"]
+        poslocs = a["default_ns:entry_dialect_area_val"]
         for loc in locs:
             regex_loc = re.compile(loc, re.IGNORECASE)
             for posloc in poslocs:
                 if regex_loc.search(posloc):
                     if posloc not in out:
                         out.append(posloc.replace('?', '\?'))
-        query = unicode("meta::entry_dialect_val=/(" + "|".join(out) + ")/").encode("utf-8")
+        query = unicode("meta::entry_dialect_area_val=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
         return ""
@@ -246,7 +248,7 @@ def cgiFieldStorageToDict(fieldStorage):
 
 def form2aql(form, adict):
     d = cgiFieldStorageToDict(form)
-    #d = {"query": ["got"], "textfield": ["religion"], "scope": ["default_ns:tok_mod"], "dating": ["13"], "search_method": ["hole_string"]}
+    #d = {"query": ["got"], "textfield": ["religion"], "scope": ["default_ns:tok_mod"], "dating": ["13"], "search_method": ["whole_string"]}
     query = parseQuery(d, adict)
     zeit = parseZeit(d, adict)
     raum = parseRaum(d, adict)
