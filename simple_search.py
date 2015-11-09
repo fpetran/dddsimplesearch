@@ -36,7 +36,7 @@ def getREMAnnotations(corpora):
         url = str("http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora/" + corpus + "/annotations?fetchvalues=true&onlymostfrequentvalues=false")
 
         xml = urllib.urlopen(url).read().decode("utf-8")
-        
+
         regexAttr = re.compile("<annisAttribute>(.+?)</annisAttribute>", re.DOTALL)
         regexAttrName = re.compile("<name>(.+?)</name>")
         regexValues = re.compile("<value>(.+?)</value>")
@@ -44,7 +44,10 @@ def getREMAnnotations(corpora):
 
         for attribute in attributes:
 
-            name = regexAttrName.findall(attribute)[0]
+            name = regexAttrName.findall(attribute)
+            if len(name) == 0:
+                continue
+            name = name[0]
             values = regexValues.findall(attribute)
 
             try:
@@ -127,18 +130,36 @@ def resolveDiacritics(word):
 
     return word
 
+# a function to pass to re.sub that replaces A -> Aa
+def upcase_to_regex(matchobj):
+    return "[" + matchobj.group(0) + matchobj.group(0).lower() + "]"
+
+# make a string into a case-insensitive regex
+# e.g. Poesie -> [Pp]oesie
+def make_i_regex(s):
+    my_s = re.sub(r'[A-Z]', upcase_to_regex, s)
+    return my_s
+
 def parseQuery(d, a):
 
     annolevel = d["scope"][0]
+    # my replacement for this function
+    words = make_i_regex(d["query"][0])
+    if d["search_method"][0] == "begins_with_word":
+        words = words + ".*"
+    elif d["search_method"][0] == "ends_with_word":
+        words = ".*" + words
+    return aql([annolevel + "=/" + words + "/"], False)
+
+    # dead code from here on
     strict = False
+    parameters = []
     try:
         if d["query"][0].startswith("\"") and d["query"][0].endswith("\""):
             strict = True
         words = d["query"][0].split()
-        parameters = []
     except KeyError:
         words = [""]
-        parameters = []
     for word in words:
         search = ""
         worddiacritics = resolveDiacritics(word.strip("\""))
@@ -159,7 +180,7 @@ def parseQuery(d, a):
         except KeyError:
             continue
 
-        search = annolevel[11:] + "=/(" + "|".join(searchlist) + ")/"
+        search = annolevel + "=/(" + "|".join(searchlist) + ")/"
 
         if search:
             parameters.append(search)
@@ -186,7 +207,7 @@ def parseZeit(d, a):
     #                    out.append(posera.replace('?', '\?'))
     #    query = unicode("meta::entry_dating_val=/(" + "|".join(out) + ")/").encode("utf-8")
             out.append(".*" + era + ".*")
-        query = unicode("meta::entry_dating_val=/(" + "|".join(out) + ")/").encode("utf-8")
+        query = unicode("meta::dating=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
         return ""
@@ -195,14 +216,20 @@ def parseRaum(d, a):
     out = []
     try:
         locs = d["location"]
-        poslocs = a["default_ns:entry_dialect_area_val"]
+        # my replacement
+        for loc in locs:
+            out.append(".*" + make_i_regex(loc) + ".*")
+        return unicode("meta::dialect_area=/(" + "|".join(out) + ")/").encode("utf-8")
+
+        # dead code from here
+        poslocs = a["dialect_area"]
         for loc in locs:
             regex_loc = re.compile(loc, re.IGNORECASE)
             for posloc in poslocs:
                 if regex_loc.search(posloc):
                     if posloc not in out:
                         out.append(posloc.replace('?', '\?'))
-        query = unicode("meta::entry_dialect_area_val=/(" + "|".join(out) + ")/").encode("utf-8")
+        query = unicode("meta::dialect_area=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
         return ""
@@ -211,14 +238,20 @@ def parseText(d, a):
     out = []
     try:
         regs = d["textfield"]
-        posregs = a["default_ns:general_text_field_val"]
+        # my replacement
+        for reg in regs:
+            out.append(".*" + make_i_regex(reg) + ".*")
+        return unicode("meta::text_field=/(" + "|".join(out) + ")/").encode("utf-8")
+
+        # dead code from here
+        posregs = a["text_field"]
         for reg in regs:
             regex_reg = re.compile(reg, re.IGNORECASE)
             for posreg in posregs:
                 if regex_reg.search(posreg):
                     if posreg not in out:
                         out.append(posreg.replace('?', '\?'))
-        query = unicode("meta::general_text_field_val=/(" + "|".join(out) + ")/").encode("utf-8")
+        query = unicode("meta::text_field=/(" + "|".join(out) + ")/").encode("utf-8")
         return query
     except KeyError:
         return ""
@@ -257,7 +290,7 @@ def form2aql(form, adict):
 
 corpora = getREMCorpora()
 annos = getREMAnnotations(corpora)
-#cgitb.enable(display=1)
+#cgib.enable(display=1)
 form = cgi.FieldStorage()
 
 aqlstr, url = form2aql(form, annos)

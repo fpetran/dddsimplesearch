@@ -56,14 +56,14 @@
 	
 	
 	<div class="search_method_field">
-	  <input type="radio" name="scope" value="default_ns:tok_mod" checked>Wortform
+	  <input type="radio" name="scope" value="tok_mod" checked>Wortform
 	  <input type="radio" name="scope" value="default_ns:lemma">Lemma 
 	  <a onmouseover="ShowInfoBox(event,'<ul><li>Entscheiden Sie, ob Sie nach Wortform oder Lemma suchen m&ouml;chten</li><li>Die Wortform ist die Form, wie sie im Text auftritt, also z.B. &quot;pruder&quot;</li><li>Das Lemma ist eine allgemeine Wortform, auf die die konkreten Wortformen zur&uuml;ckgef&uuml;hrt wurden: f&uuml;r &quot;pruder&quot; z.B. &quot;bruoder&quot;</li><li>Suchen Sie die Dokumentation auf, falls Sie genauere Informationen zu diesem Thema w&uuml;nschen</li></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a>
 	</div>
 	
 	<div class="search_method_field">
 	  <ul>
-	    <li><input type="radio" name="search_method" value="hole_string" checked>Komplettes Wort</li>
+	    <li><input type="radio" name="search_method" value="whole_string" checked>Komplettes Wort</li>
 	    <li><input type="radio" name="search_method" value="begins_with_word">Wort beginnt mit Eingabe
 	      <a onmouseover="ShowInfoBox(event,'<ul><li>Komplettes Wort: Suchen Sie nach dem Wort, wie Sie es eingeben, z.B. &quot;mit&quot;</li><li>Oder: Lassen sie zu, dass das Wort auch Bestandteil eines anderen Wortes seien darf (es wird trotzdem auch das Wort an sich gesucht):</li><ul><li>Wort beginnt mit Eingabe: findet z.B. auch &quot;mite&quot;, &quot;mitte&quot; oder &quot;mitten&quot;</li><li>Wort endet auf Eingabe: findet z.B. auch &quot;goumit&quot; oder &quot;urumit&quot;</li></ul></ul>',20,-30);" onmouseout="HideInfoBox();" href="javascript:void(0)"><img class="infobox" src="help.png" alt=""></a></li>
 	    <li><input type="radio" name="search_method" value="ends_with_word">Wort endet auf Eingabe</li>
@@ -91,21 +91,21 @@
 	      
 	      <td>
 		<ul>
-		  <li><input type="checkbox" name="textfield" value="alltag">Alltag</li>
-		  <li><input type="checkbox" name="textfield" value="literatur">Literatur</li>
-		  <li><input type="checkbox" name="textfield" value="poesie">Poesie</li>
-		  <li><input type="checkbox" name="textfield" value="wissen">Wissen(-schaft)</li>
-		  <li><input type="checkbox" name="textfield" value="religion">Religion</li>
+		  <li><input type="checkbox" name="textfield" value="Alltag">Alltag</li>
+		  <li><input type="checkbox" name="textfield" value="Literatur">Literatur</li>
+		  <li><input type="checkbox" name="textfield" value="Poesie">Poesie</li>
+		  <li><input type="checkbox" name="textfield" value="Wissen">Wissen(-schaft)</li>
+		  <li><input type="checkbox" name="textfield" value="Religion">Religion</li>
 		</ul>
 	      </td>
 	      
 	      <td>
 		<ul>
-		  <li><input type="checkbox" name="location" value="westmittel">Westmitteldeutsch</li>
-		  <li><input type="checkbox" name="location" value="ostmittel">Ostmitteldeutsch</li>
-		  <li><input type="checkbox" name="location" value="westober">Westoberdeutsch</li>
-		  <li><input type="checkbox" name="location" value="ostober">Ostoberdeutsch</li>
-		  <li><input type="checkbox" name="location" value="nordober">Nordoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="Westmittel">Westmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="Ostmittel">Ostmitteldeutsch</li>
+		  <li><input type="checkbox" name="location" value="Westober">Westoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="Ostober">Ostoberdeutsch</li>
+		  <li><input type="checkbox" name="location" value="Nordober">Nordoberdeutsch</li>
 		</ul>
 	      </td>
 
