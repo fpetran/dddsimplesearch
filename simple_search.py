@@ -17,6 +17,11 @@ import cgi
 #import cgitb
 
 
+ANNOTATION_RAUM="meta::language-region"
+ANNOTATION_ZEIT="meta::date"
+ANNOTATION_TEXT="meta::topic"
+
+
 def getREMCorpora():
     # function for reading in all available xml-filenames of REM
 
@@ -33,7 +38,7 @@ def getREMAnnotations(corpora):
 
     for corpus in corpora:
 
-        url = str("http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora/" + corpus + "/annotations?fetchvalues=true&onlymostfrequentvalues=false")
+        url = str("http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora/" + corpus + "/annotations") #?fetchvalues=true&onlymostfrequentvalues=false")
 
         xml = urllib.urlopen(url).read().decode("utf-8")
 
@@ -194,65 +199,33 @@ def regexescape(s):
     s = s.replace(".", "\.")
     return s
 
-def parseZeit(d, a):
+def parseZeit(d):
     out = []
     try:
         eras = d["dating"]
-    #    poseras = a["default_ns:entry_dating_val"]
         for era in eras:
-    #        regex_era = re.compile(era, re.IGNORECASE)
-    #        for posera in poseras:
-    #            if regex_era.search(posera):
-    #                if posera not in out:
-    #                    out.append(posera.replace('?', '\?'))
-    #    query = unicode("meta::entry_dating_val=/(" + "|".join(out) + ")/").encode("utf-8")
             out.append(".*" + era + ".*")
-        query = unicode("meta::dating=/(" + "|".join(out) + ")/").encode("utf-8")
-        return query
+        return unicode(ANNOTATION_ZEIT + "=/(" + "|".join(out) + ")/").encode("utf-8")
     except KeyError:
         return ""
 
-def parseRaum(d, a):
+def parseRaum(d):
     out = []
     try:
         locs = d["location"]
-        # my replacement
         for loc in locs:
             out.append(".*" + make_i_regex(loc) + ".*")
-        return unicode("meta::dialect_area=/(" + "|".join(out) + ")/").encode("utf-8")
-
-        # dead code from here
-        poslocs = a["dialect_area"]
-        for loc in locs:
-            regex_loc = re.compile(loc, re.IGNORECASE)
-            for posloc in poslocs:
-                if regex_loc.search(posloc):
-                    if posloc not in out:
-                        out.append(posloc.replace('?', '\?'))
-        query = unicode("meta::dialect_area=/(" + "|".join(out) + ")/").encode("utf-8")
-        return query
+        return unicode(ANNOTATION_RAUM + "=/(" + "|".join(out) + ")/").encode("utf-8")
     except KeyError:
         return ""
 
-def parseText(d, a):
+def parseText(d):
     out = []
     try:
         regs = d["textfield"]
-        # my replacement
         for reg in regs:
             out.append(".*" + make_i_regex(reg) + ".*")
-        return unicode("meta::text_field=/(" + "|".join(out) + ")/").encode("utf-8")
-
-        # dead code from here
-        posregs = a["text_field"]
-        for reg in regs:
-            regex_reg = re.compile(reg, re.IGNORECASE)
-            for posreg in posregs:
-                if regex_reg.search(posreg):
-                    if posreg not in out:
-                        out.append(posreg.replace('?', '\?'))
-        query = unicode("meta::text_field=/(" + "|".join(out) + ")/").encode("utf-8")
-        return query
+        return unicode(ANNOTATION_TEXT + "=/(" + "|".join(out) + ")/").encode("utf-8")
     except KeyError:
         return ""
 
@@ -262,16 +235,16 @@ def createAQL(query, zeit, raum, text):
     if query:
         aqlurl = query.strip()
     if text:
-        aqlurl = str(aqlurl) + " & " + str(text.strip())
+        aqlurl = str(aqlurl).strip() + " & " + str(text).strip()
     if zeit:
-        aqlurl = str(aqlurl) + " & " + str(zeit.strip())
+        aqlurl = str(aqlurl).strip() + " & " + str(zeit).strip()
     if raum:
-        aqlurl = str(aqlurl) + " & " + str(raum.strip())
+        aqlurl = str(aqlurl).strip() + " & " + str(raum).strip()
+    aqlstr = aqlurl.strip()
     aqlurl = "_q=" + aqlurl.encode("base64")
-    aqlstr = query + text + zeit + raum
     corpora = getREMCorpora()
-    scope = "&_c=" + unicode(",".join(corpora)).encode("base64") + "&cl=7&cr=7&s=0&l=30"
-    return aqlstr, unicode(baseurl.strip() + aqlurl + scope.strip())
+    scope = "&_c=" + unicode(",".join(corpora)).encode("base64").strip() + "&cl=7&cr=7&s=0&l=30"
+    return aqlstr, unicode(baseurl.strip() + aqlurl.strip() + scope.strip()).replace('\n', '')
 
 def cgiFieldStorageToDict(fieldStorage):
     params = {}
@@ -281,11 +254,10 @@ def cgiFieldStorageToDict(fieldStorage):
 
 def form2aql(form, adict):
     d = cgiFieldStorageToDict(form)
-    #d = {"query": ["got"], "textfield": ["religion"], "scope": ["default_ns:tok_mod"], "dating": ["13"], "search_method": ["whole_string"]}
-    query = parseQuery(d, adict)
-    zeit = parseZeit(d, adict)
-    raum = parseRaum(d, adict)
-    text = parseText(d, adict)
+    query = parseQuery(d)
+    zeit = parseZeit(d)
+    raum = parseRaum(d)
+    text = parseText(d)
     return createAQL(query, zeit, raum, text)
 
 corpora = getREMCorpora()
@@ -299,10 +271,14 @@ aqlstr, url = form2aql(form, annos)
 print "Content-Type: text/html\n"
 print '<!DOCTYPE html>'
 print '<html>'
-print '<head><title>Performing simplified search</title><meta HTTP-EQUIV="REFRESH" content="0; url=' + url + '"></head>'
+print '<head><title>Performing simplified search</title>'
+print '<meta HTTP-EQUIV="content-type" content="text/html; charset=utf-8">'
+print '<meta HTTP-EQUIV="REFRESH" content="0; url=' + url + '"></head>'
 print '<body>'
 print '<p>you will be redirected in 0 seconds</p>'
+print '<p>'
 print cgiFieldStorageToDict(form)
+print '</p>'
 print '<a href="' + url + '">perform the search in Annis</a>'
 print '<pre>AQL query: ' + aqlstr + '</pre>'
 print '<pre>url: ' + url + '</pre>'
