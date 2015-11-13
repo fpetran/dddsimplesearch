@@ -145,52 +145,15 @@ def make_i_regex(s):
     my_s = re.sub(r'[A-Z]', upcase_to_regex, s)
     return my_s
 
-def parseQuery(d, a):
+def parseQuery(d):
 
     annolevel = d["scope"][0]
-    # my replacement for this function
     words = make_i_regex(d["query"][0])
     if d["search_method"][0] == "begins_with_word":
         words = words + ".*"
     elif d["search_method"][0] == "ends_with_word":
         words = ".*" + words
     return aql([annolevel + "=/" + words + "/"], False)
-
-    # dead code from here on
-    strict = False
-    parameters = []
-    try:
-        if d["query"][0].startswith("\"") and d["query"][0].endswith("\""):
-            strict = True
-        words = d["query"][0].split()
-    except KeyError:
-        words = [""]
-    for word in words:
-        search = ""
-        worddiacritics = resolveDiacritics(word.strip("\""))
-        regex = re.compile(r"\b" + worddiacritics + r"\b", re.UNICODE | re.IGNORECASE)
-        #regex = re.compile(r"\b" + word + r"\b", re.UNICODE | re.IGNORECASE)
-        searchlist = []
-        try:
-            for annoattr in a[annolevel]:
-                for hit in regex.findall(annoattr):
-                    if d["search_method"][0] == "whole_string":
-                        hit = regexescape(hit)
-                    elif d["search_method"][0] == "begins_with_word":
-                        hit = regexescape(hit) + ".*"
-                    elif d["search_method"][0] == "ends_with_word":
-                        hit = ".*" + regexescape(hit)
-                    if hit not in searchlist:
-                        searchlist.append(hit)
-        except KeyError:
-            continue
-
-        search = annolevel + "=/(" + "|".join(searchlist) + ")/"
-
-        if search:
-            parameters.append(search)
-
-    return aql(parameters, strict)
 
 def regexescape(s):
     s = s.replace("|", "\|")
