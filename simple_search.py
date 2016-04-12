@@ -15,6 +15,9 @@ based on a script by Tom Ruette, HU Berlin
 import urllib2, re, urllib, codecs
 import cgi
 #import cgitb
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 
 ANNOTATION_RAUM="meta::language-region"
@@ -193,7 +196,7 @@ def parseText(d):
         return ""
 
 def createAQL(query, zeit, raum, text):
-    baseurl = "http://smokehead.linguistics.rub.de/annis3#"
+    baseurl = "http://smokehead.linguistics.rub.de/annis3/REM/#"
     aqlurl = ""
     if query:
         aqlurl = query.strip()
@@ -206,7 +209,7 @@ def createAQL(query, zeit, raum, text):
     aqlstr = aqlurl.strip()
     aqlurl = "_q=" + aqlurl.encode("base64")
     corpora = getREMCorpora()
-    scope = "&_c=" + unicode(",".join(corpora)).encode("base64").strip() + "&cl=7&cr=7&s=0&l=30"
+    scope = "&_c=" + unicode(",".join(corpora)).encode("base64").strip() + "&cl=7&cr=7&s=0&l=30&_seg=dG9rX2RpcGw"
     return aqlstr, unicode(baseurl.strip() + aqlurl.strip() + scope.strip()).replace('\n', '')
 
 def cgiFieldStorageToDict(fieldStorage):
