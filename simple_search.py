@@ -21,7 +21,7 @@ sys.setdefaultencoding("utf-8")
 
 
 ANNOTATION_RAUM="meta::language-region"
-ANNOTATION_ZEIT="meta::date"
+ANNOTATION_ZEIT="meta::time"
 ANNOTATION_TEXT="meta::topic"
 
 
