@@ -9,6 +9,8 @@ Sprachwissenschaftliches Institut
 
 Script by Janis Pagel
 based on a script by Tom Ruette, HU Berlin
+
+modified 2015-2017 F.Petran, F.Barteld
 '''
 
 # import needed modules
@@ -24,51 +26,19 @@ ANNOTATION_RAUM="meta::language-region"
 ANNOTATION_ZEIT="meta::time"
 ANNOTATION_TEXT="meta::topic"
 
+ANNIS_URL="http://www.linguistics.rub.de/annis/"
+
 
 def getREMCorpora():
     # function for reading in all available xml-filenames of REM
 
-    xml = urllib.urlopen('http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora').read().decode("utf-8")
-    regex = re.compile("<name>(.+?)</name>")
+    xml = urllib.urlopen(ANNIS_URL + 'annis-service/annis/query/corpora').read().decode("utf-8")
+    regex = re.compile("<name>((\d{2}(_\d)?-)?\d{2}_\d-\w+?-[PVU]+(_\w*?\d?)?-[XG])</name>")
 
-    return regex.findall(xml)
-
-
-def getREMAnnotations(corpora):
-    # function for reading in all attributes
-
-    annodict = {}
-
-    for corpus in corpora:
-
-        url = str("http://smokehead.linguistics.rub.de/annis-service/annis/query/corpora/" + corpus + "/annotations") #?fetchvalues=true&onlymostfrequentvalues=false")
-
-        xml = urllib.urlopen(url).read().decode("utf-8")
-
-        regexAttr = re.compile("<annisAttribute>(.+?)</annisAttribute>", re.DOTALL)
-        regexAttrName = re.compile("<name>(.+?)</name>")
-        regexValues = re.compile("<value>(.+?)</value>")
-        attributes = regexAttr.findall(xml)
-
-        for attribute in attributes:
-
-            name = regexAttrName.findall(attribute)
-            if len(name) == 0:
-                continue
-            name = name[0]
-            values = regexValues.findall(attribute)
-
-            try:
-
-                annodict[name].extend(values)
-                annodict[name] = list(set(annodict[name]))
-
-            except KeyError:
-
-                annodict[name] = list(set(values))
-
-
-    return annodict
+    corpora = regex.findall(xml)
+    # since there is now multiple capture groups, we have to extract the first column
+    corpora = [ row[0] for row in corpora ]
+    return corpora
 
 def aql(ps, strict):
     # function for creating a valid aql search-string for annis
@@ -196,7 +166,7 @@ def parseText(d):
         return ""
 
 def createAQL(query, zeit, raum, text):
-    baseurl = "http://smokehead.linguistics.rub.de/annis3/REM/#"
+    baseurl = ANNIS_URL + "annis3/REM/#"
     aqlurl = ""
     if query:
         aqlurl = query.strip()
@@ -218,7 +188,7 @@ def cgiFieldStorageToDict(fieldStorage):
         params[key] = fieldStorage.getlist(key)
     return params
 
-def form2aql(form, adict):
+def form2aql(form):
     d = cgiFieldStorageToDict(form)
     query = parseQuery(d)
     zeit = parseZeit(d)
@@ -226,12 +196,10 @@ def form2aql(form, adict):
     text = parseText(d)
     return createAQL(query, zeit, raum, text)
 
-corpora = getREMCorpora()
-annos = getREMAnnotations(corpora)
 #cgib.enable(display=1)
 form = cgi.FieldStorage()
 
-aqlstr, url = form2aql(form, annos)
+aqlstr, url = form2aql(form)
 
 
 print "Content-Type: text/html\n"
